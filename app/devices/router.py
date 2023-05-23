@@ -22,7 +22,15 @@ async def get_devices(token: str = Depends(get_token)) -> list[SDevices]:
 
 @router.post("", status_code=201)
 async def create_device(name: str, token: str = Depends(get_token)):
-    logger.info(f"Created device [{name}]", extra={
+    logger.info(f"Created device name[{name}]", extra={
         "token": token
     })
     await DevicesDAO.add(name=name)
+
+
+@router.delete("", status_code=202)
+async def delete_device(device_id: int, token: str = Depends(get_token)):
+    logger.info(f"Deleted device id[{device_id}]", extra={
+        "token": token
+    })
+    await DevicesDAO.delete(id=device_id)

@@ -7,16 +7,17 @@ from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 from fastapi_versioning import VersionedFastAPI
 
-from prometheus_fastapi_instrumentator import Instrumentator
+# from prometheus_fastapi_instrumentator import Instrumentator
 from redis import asyncio as aioredis
-from sqladmin import Admin
+# from sqladmin import Admin
 
-from app.admin.auth import authentication_backend
-from app.admin.views import UserAdmin
+# from app.admin.auth import authentication_backend
+# from app.admin.views import UserAdmin
 from app.config import settings
 from app.database import engine
 from app.logger import logger
 from app.users.router import router as users_router
+from app.devices.router import router as devices_router
 # from app.pages.router import router as pages_router
 # from app.images.router import router as images_router
 # from app.importer.router import router as import_router
@@ -28,7 +29,8 @@ sentry_sdk.init(
 
 app = FastAPI()
 
-app.include_router(users_router)
+# app.include_router(users_router)
+app.include_router(devices_router)
 # app.include_router(pages_router)
 # app.include_router(images_router)
 # app.include_router(import_router)
@@ -41,8 +43,8 @@ app = VersionedFastAPI(
 
 app.mount("/static", StaticFiles(directory="app/static"), "static")
 
-admin = Admin(app, engine, authentication_backend=authentication_backend)
-admin.add_view(UserAdmin)
+# admin = Admin(app, engine, authentication_backend=authentication_backend)
+# admin.add_view(UserAdmin)
 
 
 # @app.middleware("http")

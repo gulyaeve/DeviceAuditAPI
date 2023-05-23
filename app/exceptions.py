@@ -37,3 +37,8 @@ class IncorrectTokenFormatException(BaseAPIException):
 class UserIsNotPresentException(BaseAPIException):
     status_code = status.HTTP_401_UNAUTHORIZED
     detail = "Пользователь не найден"
+
+
+class WrongTokenException(BaseAPIException):
+    status_code = status.HTTP_401_UNAUTHORIZED
+    detail = "Bearer token missing or unknown"

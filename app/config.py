@@ -45,6 +45,7 @@ class Settings(BaseSettings):
     # Auth
     SECRET_KEY: str
     ALGORITHM: str
+    TOKEN_BEARER: str
 
     class Config:
         env_file = ".env.dev"

@@ -10,7 +10,7 @@ from alembic import context
 from app.database import Base
 from app.config import settings
 
-from app.users.models import Users
+from app.devices.models import Devices
 
 sys.path.insert(0, dirname(dirname(dirname(abspath(__file__)))))
 

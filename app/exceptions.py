@@ -1,0 +1,39 @@
+from fastapi import HTTPException, status
+
+
+class BaseAPIException(HTTPException):
+    status_code = 500
+    detail = ""
+
+    def __init__(self):
+        super().__init__(status_code=self.status_code, detail=self.detail)
+
+
+class UserAlreadyExistsException(BaseAPIException):
+    status_code = status.HTTP_409_CONFLICT
+    detail = "User exists"
+
+
+class IncorrectEmailOrPasswordException(BaseAPIException):
+    status_code = status.HTTP_401_UNAUTHORIZED
+    detail = "Wrong email or password"
+
+
+class TokenAbsentException(BaseAPIException):
+    status_code = status.HTTP_401_UNAUTHORIZED
+    detail = "No token"
+
+
+class TokenExpiredException(BaseAPIException):
+    status_code = status.HTTP_401_UNAUTHORIZED
+    detail = "Expired token"
+
+
+class IncorrectTokenFormatException(BaseAPIException):
+    status_code = status.HTTP_401_UNAUTHORIZED
+    detail = "Wrong token format"
+
+
+class UserIsNotPresentException(BaseAPIException):
+    status_code = status.HTTP_401_UNAUTHORIZED
+    detail = "Пользователь не найден"

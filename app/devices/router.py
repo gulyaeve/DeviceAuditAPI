@@ -20,9 +20,9 @@ async def get_devices(token: str = Depends(get_token)) -> list[SDevices]:
     return devices
 
 
-@router.post("")
+@router.post("", status_code=201)
 async def create_device(name: str, token: str = Depends(get_token)):
-    logger.info(f"Created device {name}", extra={
+    logger.info(f"Created device [{name}]", extra={
         "token": token
     })
     await DevicesDAO.add(name=name)

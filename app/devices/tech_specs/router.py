@@ -23,21 +23,10 @@ async def get_tech_specs(device_id: int, token: str = Depends(get_token)) -> lis
     return tech_specs
 
 
-# @router.get(
-#     "/{tech_spec_id}",
-#     status_code=200,
-#     description="Получение технической спецификации",
-# )
-# async def get_tech_spec(tech_spec_id: int, token: str = Depends(get_token)) -> STechSpec | None:
-#     logger.info(f"Get tech spec by id[{tech_spec_id}]", extra={"token": token})
-#     tech_spec = await TechSpecsDAO.find_by_id(tech_spec_id)
-#     return tech_spec
-
-
 @router.post(
     "",
     status_code=201,
-    description="Запись технических спецификаций",
+    description="Запись технических спецификаций для устройства",
 )
 async def add_tech_specs(device_id: int, tech_specs: list[STechSpec], token: str = Depends(get_token)):
     logger.info(f"Created tech specs for device_id[{device_id}]", extra={"token": token, "tech_specs": tech_specs})

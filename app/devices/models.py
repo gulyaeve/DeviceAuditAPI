@@ -7,4 +7,4 @@ class Devices(Base):
     __tablename__ = "devices"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
+    name = Column(String, nullable=False, unique=True)

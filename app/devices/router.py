@@ -14,8 +14,7 @@ router = APIRouter(
 @router.get(
     "",
     status_code=200,
-    summary="Get devices list",
-    description="Получение списка устройств"
+    description="Получение списка устройств",
 )
 async def get_devices(token: str = Depends(get_token)) -> list[SDevices]:
     logger.info("Get devices", extra={"token": token})
@@ -23,21 +22,33 @@ async def get_devices(token: str = Depends(get_token)) -> list[SDevices]:
     return devices
 
 
-@router.get("/{device_id}")
+@router.get(
+    "/{device_id}",
+    status_code=200,
+    description="Получение информации об устройстве",
+)
 async def get_device(device_id: int, token: str = Depends(get_token)) -> SDevices:
     logger.info(f"Get device by id[{device_id}]", extra={"token": token})
     device = await DevicesDAO.find_by_id(device_id)
     return device
 
 
-@router.post("", status_code=201)
-async def create_device(name: str, token: str = Depends(get_token)):
+@router.post(
+    "",
+    status_code=201,
+    description="Создание нового устройства",
+)
+async def create_device(name: str, token: str = Depends(get_token)) -> SDevices:
     logger.info(f"Created device name[{name}]", extra={"token": token})
     device = await DevicesDAO.add(name=name)
     return device
 
 
-@router.patch("/{device_id}", status_code=200)
+@router.patch(
+    "/{device_id}",
+    status_code=200,
+    description="Изменение имени устройства",
+)
 async def change_device_name(
     device_id: int, new_name: str, token: str = Depends(get_token)
 ) -> SDevices:
@@ -48,7 +59,11 @@ async def change_device_name(
     return device
 
 
-@router.delete("", status_code=202)
+@router.delete(
+    "",
+    status_code=202,
+    description="Удаление устройства",
+)
 async def delete_device(device_id: int, token: str = Depends(get_token)):
     logger.info(f"Deleted device id[{device_id}]", extra={"token": token})
     await DevicesDAO.delete(id=device_id)

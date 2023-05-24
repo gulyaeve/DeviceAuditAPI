@@ -10,7 +10,7 @@ async def import_from_csv(
     table_name: str,
     file_path: str,
 ):
-    with open(file_path, newline='', encoding="utf-8") as csvfile:
+    with open(file_path, newline="", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile)
         values = []
         for row in reader:

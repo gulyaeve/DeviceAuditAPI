@@ -15,7 +15,9 @@ router = APIRouter(
 
 
 @router.post("/{table_name}", status_code=201)
-async def import_csv(table_name: str, file: UploadFile,  user: Users = Depends(get_current_user)):
+async def import_csv(
+    table_name: str, file: UploadFile, user: Users = Depends(get_current_user)
+):
     if user:
         file_path = f"app/static/csv/{table_name}_{datetime.datetime.now()}.csv"
         with open(file_path, "wb+") as file_object:
@@ -23,4 +25,3 @@ async def import_csv(table_name: str, file: UploadFile,  user: Users = Depends(g
         await import_from_csv(table_name, file_path)
     else:
         raise UserIsNotPresentException
-

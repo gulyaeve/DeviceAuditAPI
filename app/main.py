@@ -9,6 +9,7 @@ from fastapi_versioning import VersionedFastAPI
 
 # from prometheus_fastapi_instrumentator import Instrumentator
 from redis import asyncio as aioredis
+
 # from sqladmin import Admin
 
 # from app.admin.auth import authentication_backend
@@ -18,6 +19,7 @@ from app.database import engine
 from app.logger import logger
 from app.users.router import router as users_router
 from app.devices.router import router as devices_router
+
 # from app.pages.router import router as pages_router
 # from app.images.router import router as images_router
 # from app.importer.router import router as import_router
@@ -37,8 +39,8 @@ app.include_router(devices_router)
 
 app = VersionedFastAPI(
     app,
-    version_format='{major}',
-    prefix_format='/api/v{major}',
+    version_format="{major}",
+    prefix_format="/api/v{major}",
 )
 
 app.mount("/static", StaticFiles(directory="app/static"), "static")
@@ -72,4 +74,3 @@ async def startup():
 #     excluded_handlers=[".*admin.*", "/metrics"],
 # )
 # instrumentator.instrument(app).expose(app)
-

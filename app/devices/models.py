@@ -11,3 +11,4 @@ class Devices(Base):
     name = Column(String, nullable=False, unique=True)
 
     tech_specs = relationship("TechSpecs", back_populates="device")
+    inspections = relationship("Inspections", back_populates="device")

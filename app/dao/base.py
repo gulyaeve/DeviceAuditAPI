@@ -70,6 +70,22 @@ class BaseDAO:
     @classmethod
     async def delete(cls, **filter_by):
         async with async_session_maker() as session:
-            query = delete(cls.model).filter_by(**filter_by)
-            await session.execute(query)
-            await session.commit()
+            try:
+                query = delete(cls.model).filter_by(**filter_by)
+                await session.execute(query)
+                await session.commit()
+            except IntegrityError:
+                logger.error(
+                    "Database integrity error",
+                    extra={"data": filter_by},
+                    exc_info=True
+                )
+                raise DatabaseIntegrityError
+            except (SQLAlchemyError, Exception) as e:
+                msg = ""
+                if isinstance(e, SQLAlchemyError):
+                    msg = "Database Exc: Cannot add model"
+                elif isinstance(e, Exception):
+                    msg = "Unknown Exc: Cannot add model"
+                extra = {"data": filter_by}
+                logger.error(msg, extra=extra, exc_info=True)

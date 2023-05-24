@@ -22,7 +22,7 @@ from app.devices.router import router as devices_router
 from app.devices.tech_specs.router import router as tech_specs_router
 
 # from app.pages.router import router as pages_router
-# from app.images.router import router as images_router
+from app.images.router import router as images_router
 # from app.importer.router import router as import_router
 
 sentry_sdk.init(
@@ -36,7 +36,7 @@ app = FastAPI()
 app.include_router(devices_router)
 app.include_router(tech_specs_router)
 # app.include_router(pages_router)
-# app.include_router(images_router)
+app.include_router(images_router)
 # app.include_router(import_router)
 
 app = VersionedFastAPI(

@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends
 from app.auth.scheme import get_token
 from app.devices.dao import DevicesDAO
 from app.devices.schemas import SDevices
+from app.devices.tech_specs.dao import TechSpecsDAO
 from app.exceptions import EntityNotExistsException
 from app.logger import logger
 
@@ -63,12 +64,13 @@ async def change_device_name(
 @router.delete(
     "/{device_id}",
     status_code=202,
-    description="Удаление устройства",
+    description="Удаление устройства и спецификаций",
 )
 async def delete_device(device_id: int, token: str = Depends(get_token)):
     logger.info(f"Deleted device id[{device_id}]", extra={"token": token})
     device = await DevicesDAO.find_by_id(device_id)
     if device:
+        await TechSpecsDAO.delete(device_id=device_id)
         await DevicesDAO.delete(id=device_id)
     else:
         raise EntityNotExistsException

@@ -47,3 +47,8 @@ class WrongTokenException(BaseAPIException):
 class DatabaseIntegrityError(BaseAPIException):
     status_code = status.HTTP_409_CONFLICT
     detail = "Integration error / model conflict"
+
+
+class EntityNotExistsException(BaseAPIException):
+    status_code = status.HTTP_400_BAD_REQUEST
+    detail = "Entity does not exists"

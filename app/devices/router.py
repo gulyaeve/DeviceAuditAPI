@@ -27,7 +27,7 @@ async def get_devices(token: str = Depends(get_token)) -> list[SDevices]:
     status_code=200,
     description="Получение информации об устройстве",
 )
-async def get_device(device_id: int, token: str = Depends(get_token)) -> SDevices:
+async def get_device(device_id: int, token: str = Depends(get_token)) -> SDevices | None:
     logger.info(f"Get device by id[{device_id}]", extra={"token": token})
     device = await DevicesDAO.find_by_id(device_id)
     return device

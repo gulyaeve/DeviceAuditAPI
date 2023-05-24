@@ -42,3 +42,8 @@ class UserIsNotPresentException(BaseAPIException):
 class WrongTokenException(BaseAPIException):
     status_code = status.HTTP_401_UNAUTHORIZED
     detail = "Bearer token missing or unknown"
+
+
+class DatabaseIntegrityError(BaseAPIException):
+    status_code = status.HTTP_409_CONFLICT
+    detail = "Integration error / model conflict"

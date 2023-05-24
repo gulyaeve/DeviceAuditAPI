@@ -77,7 +77,7 @@ class BaseDAO:
             except IntegrityError:
                 logger.error(
                     "Database integrity error",
-                    extra={"data": filter_by},
+                    extra={"filter_by": filter_by},
                     exc_info=True
                 )
                 raise DatabaseIntegrityError
@@ -87,5 +87,5 @@ class BaseDAO:
                     msg = "Database Exc: Cannot add model"
                 elif isinstance(e, Exception):
                     msg = "Unknown Exc: Cannot add model"
-                extra = {"data": filter_by}
+                extra = {"filter_by": filter_by}
                 logger.error(msg, extra=extra, exc_info=True)

@@ -52,12 +52,14 @@ async def create_inspection(
 ) -> SInspection:
     logger.info(f"Created inspection", extra={"token": token, "new_inspection": data})
     im_path = f"app/static/images/{device_id}_{datetime.datetime.now()}.png"
+
     with open(im_path, "wb+") as file_object:
         shutil.copyfileobj(image.file, file_object)
+    process_pic.delay(im_path)
+
     inspection = await InspectionsDAO.add(
         device_id=device_id,
         image_path=im_path,
         data=data,
     )
-    process_pic.delay(im_path)
     return inspection

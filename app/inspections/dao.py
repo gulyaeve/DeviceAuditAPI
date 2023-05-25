@@ -1,5 +1,6 @@
+
 from pydantic import json
-from sqlalchemy import insert
+from sqlalchemy import insert, select
 
 from app.dao.base import BaseDAO
 from app.database import async_session_maker
@@ -32,7 +33,7 @@ class InspectionsDAO(BaseDAO):
                     result = await session.execute(query)
                     await session.commit()
                     logger.info(f"Inserted inspection for device [{device_id}]", extra={"data": data})
-                    return result.mappings().one()
+                    return result.scalars().one()
             else:
                 raise InspectionValidateException
         else:

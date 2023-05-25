@@ -1,9 +1,19 @@
-from pydantic import BaseModel, Json
+import json
+
+from pydantic import BaseModel, Json, validator
 
 
 class SInspection(BaseModel):
     device_id: int
     data: Json
+
+    @validator('data', pre=True)
+    def format_json(cls, data):
+        if isinstance(data, dict):
+            return json.dumps(data)
+        if isinstance(data, str):
+            # print(data)
+            return data
 
     class Config:
         orm_mode = True

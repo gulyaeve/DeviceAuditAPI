@@ -15,3 +15,10 @@ class TechSpecs(Base):
 
     device = relationship("Devices", back_populates=__tablename__)
 
+    def __repr__(self):
+        return f"TechSpec(" \
+               f"id={self.id!r}, " \
+               f"device_id={self.device_id!r}, " \
+               f"description={self.description!r}, " \
+               f"reference_value={self.reference_value!r})"
+

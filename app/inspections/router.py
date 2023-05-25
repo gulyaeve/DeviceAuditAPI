@@ -38,7 +38,7 @@ async def get_inspection(inspection_id: int, token: str = Depends(get_token)) ->
     status_code=201,
     description="Создание записи исследования",
 )
-async def create_inspection(new_inspection: SInspection, token: str = Depends(get_token)):
+async def create_inspection(new_inspection: SInspection, token: str = Depends(get_token)) -> SInspection:
     logger.info(f"Created inspection", extra={"token": token, "new_inspection": new_inspection})
     inspection = await InspectionsDAO.add(
         device_id=new_inspection.device_id,

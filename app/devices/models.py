@@ -12,3 +12,6 @@ class Devices(Base):
 
     tech_specs = relationship("TechSpecs", back_populates="device")
     inspections = relationship("Inspections", back_populates="device")
+
+    def __repr__(self):
+        return f"Device(id={self.id!r}, name={self.name!r})"

@@ -11,9 +11,7 @@ class SInspection(BaseModel):
     def format_json(cls, data):
         if isinstance(data, dict):
             return json.dumps(data)
-        if isinstance(data, str):
-            # print(data)
-            return data
+        return data
 
     class Config:
         orm_mode = True

@@ -52,3 +52,8 @@ class DatabaseIntegrityError(BaseAPIException):
 class EntityNotExistsException(BaseAPIException):
     status_code = status.HTTP_400_BAD_REQUEST
     detail = "Entity does not exists"
+
+
+class InspectionValidateException(BaseAPIException):
+    status_code = status.HTTP_400_BAD_REQUEST
+    detail = "Data must contains all tech specs"

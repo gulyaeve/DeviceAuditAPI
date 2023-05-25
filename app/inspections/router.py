@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 
 from app.auth.scheme import get_token
 from app.inspections.dao import InspectionsDAO
-from app.inspections.schemas import SInspection
+from app.inspections.schemas import SInspection, SInspectionFull
 from app.logger import logger
 
 router = APIRouter(
@@ -16,7 +16,7 @@ router = APIRouter(
     status_code=200,
     description="Получение списка исследований",
 )
-async def get_inspections(token: str = Depends(get_token)) -> list[SInspection]:
+async def get_inspections(token: str = Depends(get_token)) -> list[SInspectionFull]:
     logger.info("Get inspections", extra={"token": token})
     inspections = await InspectionsDAO.find_all()
     return inspections
@@ -27,7 +27,7 @@ async def get_inspections(token: str = Depends(get_token)) -> list[SInspection]:
     status_code=200,
     description="Получение информации об исследовании",
 )
-async def get_inspection(inspection_id: int, token: str = Depends(get_token)) -> SInspection | None:
+async def get_inspection(inspection_id: int, token: str = Depends(get_token)) -> SInspectionFull | None:
     logger.info(f"Get inspection by id[{inspection_id}]", extra={"token": token})
     inspection = await InspectionsDAO.find_by_id(inspection_id)
     return inspection

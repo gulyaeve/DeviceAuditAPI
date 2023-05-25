@@ -15,3 +15,18 @@ class SInspection(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class SInspectionFull(BaseModel):
+    id: int
+    device_id: int
+    data: Json
+
+    @validator('data', pre=True)
+    def format_json(cls, data):
+        if isinstance(data, dict):
+            return json.dumps(data)
+        return data
+
+    class Config:
+        orm_mode = True

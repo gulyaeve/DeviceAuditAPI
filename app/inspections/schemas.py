@@ -19,7 +19,7 @@ class SInspection(BaseModel):
 
 class SInspectionFull(BaseModel):
     id: int
-    image_path: str
+    image_path: str | None
     device_id: int
     data: Json
 

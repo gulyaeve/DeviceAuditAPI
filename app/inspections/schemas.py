@@ -1,5 +1,4 @@
-from pydantic import BaseModel
-from pydantic.types import Json
+from pydantic import BaseModel, Json
 
 
 class SInspection(BaseModel):

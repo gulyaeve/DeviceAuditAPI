@@ -20,6 +20,7 @@ from app.logger import logger
 from app.users.router import router as users_router
 from app.devices.router import router as devices_router
 from app.devices.tech_specs.router import router as tech_specs_router
+from app.inspections.router import router as inspections_router
 
 # from app.pages.router import router as pages_router
 from app.images.router import router as images_router
@@ -35,6 +36,7 @@ app = FastAPI()
 # app.include_router(users_router)
 app.include_router(devices_router)
 app.include_router(tech_specs_router)
+app.include_router(inspections_router)
 # app.include_router(pages_router)
 app.include_router(images_router)
 # app.include_router(import_router)

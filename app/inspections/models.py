@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, JSON, ForeignKey
+from sqlalchemy import Column, Integer, JSON, ForeignKey, String
 from sqlalchemy.orm import relationship
 
 from app.database import Base
@@ -9,6 +9,7 @@ class Inspections(Base):
     __tablename__ = "inspections"
 
     id = Column(Integer, primary_key=True)
+    image_path = Column(String, nullable=True)
     device_id = Column(ForeignKey(f"{Devices.__tablename__}.id"))
     data = Column(JSON)
 

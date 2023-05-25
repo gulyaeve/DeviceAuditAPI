@@ -10,4 +10,4 @@ def process_pic(
     im_path = Path(path)
     im = Image.open(im_path)
     im.thumbnail((600, 600), Image.Resampling.LANCZOS)
-    im.save(f"app/static/images/resized_{im_path.name}.png")
+    im.save(f"app/static/images/{im_path.name}")

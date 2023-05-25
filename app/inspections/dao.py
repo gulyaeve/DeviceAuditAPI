@@ -1,6 +1,6 @@
 
 from pydantic import json
-from sqlalchemy import insert, select
+from sqlalchemy import insert
 
 from app.dao.base import BaseDAO
 from app.database import async_session_maker

@@ -12,8 +12,18 @@ def validate_to_reference(value, reference: str):
             result = True
         else:
             result = False
+    elif reference.startswith(">"):
+        if int(value) > int(re.findall(r'\d+', reference)[0]):
+            result = True
+        else:
+            result = False
     elif reference.startswith("<="):
         if int(value) <= int(re.findall(r'\d+', reference)[0]):
+            result = True
+        else:
+            result = False
+    elif reference.startswith("<"):
+        if int(value) < int(re.findall(r'\d+', reference)[0]):
             result = True
         else:
             result = False

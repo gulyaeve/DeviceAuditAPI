@@ -30,11 +30,9 @@ class InspectionsDAO(BaseDAO):
                     validation = validate_to_reference(value, reference)
                     if validation is not None:
                         if validation is True:
-                            data[key] += f" ({reference}) Соответствует стандарту"
+                            data[key] += f" ({reference}) PASSED"
                         else:
-                            data[key] += f" ({reference}) Не соответствует стандарту"
-                    else:
-                        pass
+                            data[key] += f" ({reference}) FAILED"
 
                 async with async_session_maker() as session:
                     query = (

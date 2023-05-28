@@ -25,6 +25,7 @@ class InspectionsDAO(BaseDAO):
             tech_specs_list = [tech_spec.description for tech_spec in tech_specs]
             if tech_specs_list == list(data.keys()):
 
+                # Проверка по референсным значениям
                 for index, (key, value) in enumerate(data.items()):
                     reference = tech_specs[index].reference_value
                     validation = validate_to_reference(value, reference)

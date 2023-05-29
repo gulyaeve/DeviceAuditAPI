@@ -18,7 +18,7 @@ class InspectionsDAO(BaseDAO):
     model = Inspections
 
     @classmethod
-    async def add(cls, device_id: int, image_path: str, data: json):
+    async def add(cls, device_id: int, data: json):
         device = await DevicesDAO.find_one_or_none(id=device_id)
         if device:
             tech_specs: list[TechSpecs] = await TechSpecsDAO.find_all(device_id=device_id)
@@ -40,7 +40,6 @@ class InspectionsDAO(BaseDAO):
                         insert(cls.model)
                         .values(
                             device_id=device_id,
-                            image_path=image_path,
                             data=data,
                         )
                         .returning(cls.model)

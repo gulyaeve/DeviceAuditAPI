@@ -37,6 +37,7 @@ def write_pdf(
         inspection_id: int,
         device_name: str,
         data: dict,
+        output: str,
         image: str = "",
 ):
     if image:
@@ -65,5 +66,5 @@ def write_pdf(
             )
         )
     path = os.path.abspath(f'app/static/html/{inspection_id}.html')
-    converter.convert(f'file:///{path}', f'app/static/pdf/{inspection_id}.pdf')
+    converter.convert(f'file:///{path}', output)
     # os.remove(path)

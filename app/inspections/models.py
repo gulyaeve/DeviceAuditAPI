@@ -16,5 +16,8 @@ class Inspections(Base):
     device = relationship("Devices", back_populates=__tablename__)
 
     def __repr__(self):
-        return f"Inspection(id={self.id!r}, device_id={self.device_id!r}, data={self.data!r})"
+        return f"Inspection(id={self.id!r}, " \
+               f"image_path={self.image_path!r}, " \
+               f"device_id={self.device_id!r}, " \
+               f"data={self.data!r})"
 

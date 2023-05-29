@@ -1,8 +1,8 @@
 FROM python:3.11
 
-RUN mkdir /booking
+RUN mkdir /src
 
-WORKDIR /booking
+WORKDIR /src
 
 COPY requirements.txt .
 
@@ -10,7 +10,7 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-RUN chmod a+x /booking/docker/*.sh
+RUN chmod a+x /src/docker/*.sh
 
 # RUN alembic upgrade head
 

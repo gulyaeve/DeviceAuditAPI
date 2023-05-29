@@ -25,7 +25,7 @@ services:
 #      - db
 #      - redis
     # Если не работает эта команда, используйте закомментированную
-    command: ["/DeviceAuditAPI/docker/app.sh"]
+    command: ["/src/docker/app.sh"]
     # command: sh -c "alembic upgrade head && gunicorn app.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000"
     ports:
       - "7777:8000"
@@ -36,7 +36,7 @@ services:
       context: .
     container_name: device_api_app_celery
     # Если не работает эта команда, используйте закомментированную
-    command: ["/DeviceAuditAPI/docker/celery.sh", "celery"]
+    command: ["/src/docker/celery.sh", "celery"]
     # command: sh -c "celery --app=app.tasks.celery:celery worker -l INFO"
     env_file:
       - .env

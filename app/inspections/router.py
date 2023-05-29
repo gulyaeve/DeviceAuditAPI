@@ -62,10 +62,8 @@ async def create_inspection(
     )
 
     im_path = f"app/static/images/{inspection.id}.png"
-
     with open(im_path, "wb+") as file_object:
         shutil.copyfileobj(image.file, file_object)
-
     process_pic.delay(im_path)
 
     pdf_path = f"app/static/pdf/{inspection.id}.pdf"
@@ -76,8 +74,8 @@ async def create_inspection(
         image=im_path,
         output=pdf_path,
     )
+
     inspection: Inspections = await InspectionsDAO.update_by_id(
         inspection.id, pdf_path=pdf_path, image_path=im_path
     )
-
     return inspection

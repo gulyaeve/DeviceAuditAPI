@@ -11,7 +11,7 @@ from app.database import Base
 from app.config import settings
 
 from app.devices.models import Devices
-from app.devices.tech_specs.models import TechSpecs
+from app.tech_specs.models import TechSpecs
 from app.inspections.models import Inspections
 
 sys.path.insert(0, dirname(dirname(dirname(abspath(__file__)))))

@@ -19,7 +19,7 @@ from app.database import engine
 from app.logger import logger
 from app.users.router import router as users_router
 from app.devices.router import router as devices_router
-from app.devices.tech_specs.router import router as tech_specs_router
+from app.tech_specs.router import router as tech_specs_router
 from app.inspections.router import router as inspections_router
 
 # from app.pages.router import router as pages_router

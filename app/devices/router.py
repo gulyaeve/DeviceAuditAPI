@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 from app.auth.scheme import get_token
 from app.devices.dao import DevicesDAO
 from app.devices.schemas import SDevices
-from app.devices.tech_specs.dao import TechSpecsDAO
+from app.tech_specs.dao import TechSpecsDAO
 from app.exceptions import EntityNotExistsException
 from app.logger import logger
 

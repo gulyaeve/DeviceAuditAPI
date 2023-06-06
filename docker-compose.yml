@@ -21,6 +21,8 @@ services:
     container_name: device_api_app
     env_file:
       - .env
+    volumes:
+      - ./static:/src/static
 #    depends_on:
 #      - db
 #      - redis
@@ -34,10 +36,13 @@ services:
     image: device_audit_api_celery
     build:
       context: .
+      dockerfile: Dockerfile-celery
     container_name: device_api_app_celery
     # Если не работает эта команда, используйте закомментированную
     command: ["/src/docker/celery.sh", "celery"]
     # command: sh -c "celery --app=app.tasks.celery:celery worker -l INFO"
+    volumes:
+      - ./static:/src/static
     env_file:
       - .env
 #    depends_on:

@@ -22,5 +22,6 @@ class Inspections(Base):
                f"image_path={self.image_path!r}, " \
                f"pdf_path={self.pdf_path!r}, " \
                f"device_id={self.device_id!r}, " \
-               f"data={self.data!r})"
+               f"data={self.data!r}, " \
+               f"telegram_id={self.telegram_id!r})"
 

@@ -1,5 +1,6 @@
 import os
 
+from app.config import settings
 from app.tasks.celery_config import celery
 from PIL import Image
 from pathlib import Path
@@ -29,7 +30,7 @@ def process_pic(
     im_path = Path(path)
     im = Image.open(im_path)
     im.thumbnail((600, 600), Image.Resampling.LANCZOS)
-    im.save(f"app/static/images/{im_path.name}")
+    im.save(f"{settings.STATIC_DIR}/images/{im_path.name}")
 
 
 @celery.task
@@ -57,7 +58,7 @@ def write_pdf(
             table = table.replace(item, new_item)
             table = table.replace("PASSED", "")
 
-    with open(f"app/static/html/{inspection_id}.html", "w") as html:
+    with open(f"{settings.STATIC_DIR}/html/{inspection_id}.html", "w") as html:
         html.write(
             html_template.format(
                 device_name=device_name,
@@ -65,6 +66,6 @@ def write_pdf(
                 image=img,
             )
         )
-    path = os.path.abspath(f'app/static/html/{inspection_id}.html')
+    path = os.path.abspath(f'{settings.STATIC_DIR}/html/{inspection_id}.html')
     converter.convert(f'file:///{path}', output)
     # os.remove(path)

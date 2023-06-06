@@ -47,6 +47,8 @@ class Settings(BaseSettings):
     ALGORITHM: str
     TOKEN_BEARER: str
 
+    STATIC_DIR: str
+
     class Config:
         env_file = ".env.dev"
 

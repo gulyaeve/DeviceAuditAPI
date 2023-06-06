@@ -6,6 +6,7 @@ from fastapi import APIRouter, Depends, UploadFile
 from pydantic import Json
 
 from app.auth.scheme import get_token
+from app.config import settings
 from app.devices.dao import DevicesDAO
 from app.devices.models import Devices
 from app.inspections.dao import InspectionsDAO
@@ -61,12 +62,12 @@ async def create_inspection(
         data=data,
     )
 
-    im_path = f"app/static/images/{inspection.id}.png"
+    im_path = f"{settings.STATIC_DIR}/images/{inspection.id}.png"
     with open(im_path, "wb+") as file_object:
         shutil.copyfileobj(image.file, file_object)
     process_pic.delay(im_path)
 
-    pdf_path = f"app/static/pdf/{inspection.id}.pdf"
+    pdf_path = f"{settings.STATIC_DIR}/pdf/{inspection.id}.pdf"
     write_pdf.delay(
         inspection_id=inspection.id,
         device_name=device.name,

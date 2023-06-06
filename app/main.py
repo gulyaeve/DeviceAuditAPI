@@ -47,7 +47,7 @@ app = VersionedFastAPI(
     prefix_format="/api/v{major}",
 )
 
-app.mount("/static", StaticFiles(directory="app/static"), "static")
+app.mount("/static", StaticFiles(directory=settings.STATIC_DIR), "static")
 
 # admin = Admin(app, engine, authentication_backend=authentication_backend)
 # admin.add_view(UserAdmin)

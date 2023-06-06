@@ -26,10 +26,15 @@ router = APIRouter(
     status_code=200,
     description="Получение списка исследований",
 )
-async def get_inspections(token: str = Depends(get_token)) -> list[SInspectionFull]:
-    logger.info("Get inspections", extra={"token": token})
-    inspections = await InspectionsDAO.find_all()
-    return inspections
+async def get_inspections(token: str = Depends(get_token), telegram_id: str | None = None) -> list[SInspectionFull]:
+    if telegram_id:
+        logger.info(f"Get inspections for telegram_id [{telegram_id}]", extra={"token": token})
+        inspections = await InspectionsDAO.find_all(telegram_id=telegram_id)
+        return inspections
+    else:
+        logger.info("Get inspections", extra={"token": token})
+        inspections = await InspectionsDAO.find_all()
+        return inspections
 
 
 @router.get(
@@ -53,6 +58,7 @@ async def create_inspection(
         data: Json,
         image: Optional[UploadFile],
         token: str = Depends(get_token),
+        telegram_id: str | None = None,
 ) -> SInspectionFull:
     logger.info(f"Created inspection", extra={"token": token, "new_inspection": data})
 
@@ -60,6 +66,7 @@ async def create_inspection(
     inspection: Inspections = await InspectionsDAO.add(
         device_id=device_id,
         data=data,
+        telegram_id=telegram_id,
     )
 
     im_path = f"{settings.STATIC_DIR}/images/{inspection.id}.png"

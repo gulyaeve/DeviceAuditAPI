@@ -13,6 +13,7 @@ class Inspections(Base):
     pdf_path = Column(String, nullable=True)
     device_id = Column(ForeignKey(f"{Devices.__tablename__}.id"))
     data = Column(JSON)
+    telegram_id = Column(String, nullable=True)
 
     device = relationship("Devices", back_populates=__tablename__)
 

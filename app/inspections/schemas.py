@@ -23,6 +23,7 @@ class SInspectionFull(BaseModel):
     pdf_path: str | None
     device_id: int
     data: Json
+    telegram_id: str | None
 
     @validator('data', pre=True)
     def format_json(cls, data):

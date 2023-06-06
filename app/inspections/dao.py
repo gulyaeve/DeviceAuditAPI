@@ -18,7 +18,7 @@ class InspectionsDAO(BaseDAO):
     model = Inspections
 
     @classmethod
-    async def add(cls, device_id: int, data: json):
+    async def add(cls, device_id: int, data: json, telegram_id: str | None):
         device = await DevicesDAO.find_one_or_none(id=device_id)
         if device:
             tech_specs: list[TechSpecs] = await TechSpecsDAO.find_all(device_id=device_id)
@@ -41,12 +41,16 @@ class InspectionsDAO(BaseDAO):
                         .values(
                             device_id=device_id,
                             data=data,
+                            telegram_id=telegram_id,
                         )
                         .returning(cls.model)
                     )
                     result = await session.execute(query)
                     await session.commit()
-                    logger.info(f"Inserted inspection for device [{device_id}]", extra={"data": data})
+                    logger.info(
+                        f"Inserted inspection for device [{device_id}]",
+                        extra={"telegram_id": telegram_id, "data": data}
+                    )
                     return result.scalars().one()
             else:
                 raise InspectionValidateException

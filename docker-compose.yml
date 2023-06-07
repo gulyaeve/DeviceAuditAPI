@@ -32,7 +32,7 @@ services:
     ports:
       - "7777:8000"
 
-  celery:
+  device_audit_api_celery:
     image: device_audit_api_celery
     build:
       context: .

@@ -50,13 +50,13 @@ def write_pdf(
     table = json2html.convert(json=data)
     for item in table.split("</td>"):
         if "FAILED" in item:
-            new_item = item.replace("<td>", "<td bgcolor=\"red\">")
-            table = table.replace(item, new_item)
-            table = table.replace("FAILED", "")
+            item_color = item.replace("<td>", "<td bgcolor=\"red\">")
+            item_without_result = item_color.replace("FAILED", "")
+            table = table.replace(item, item_without_result)
         if "PASSED" in item:
-            new_item = item.replace("<td>", "<td bgcolor=\"green\">")
-            table = table.replace(item, new_item)
-            table = table.replace("PASSED", "")
+            item_color = item.replace("<td>", "<td bgcolor=\"green\">")
+            item_without_result = item_color.replace("PASSED", "")
+            table = table.replace(item, item_without_result)
 
     with open(f"{settings.STATIC_DIR}/html/{inspection_id}.html", "w") as html:
         html.write(

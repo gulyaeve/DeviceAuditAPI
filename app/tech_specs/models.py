@@ -10,7 +10,7 @@ class TechSpecs(Base):
 
     id = Column(Integer, primary_key=True)
     device_id = Column(ForeignKey(f"{Devices.__tablename__}.id"))
-    description = Column(String, unique=True, nullable=False)
+    description = Column(String, nullable=False)
     reference_value = Column(String, nullable=True)
 
     device = relationship("Devices", back_populates=__tablename__)

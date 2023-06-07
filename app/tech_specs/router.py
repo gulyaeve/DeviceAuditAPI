@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 
 from app.auth.scheme import get_token
 from app.tech_specs.dao import TechSpecsDAO
-from app.tech_specs.schemas import STechSpec
+from app.tech_specs.schemas import STechSpec, STechSpecForImport
 from app.logger import logger
 
 router = APIRouter(
@@ -40,7 +40,7 @@ async def get_tech_specs(
     status_code=201,
     description="Запись технических спецификаций для устройства",
 )
-async def add_tech_specs(device_id: int, tech_specs: list[STechSpec], token: str = Depends(get_token)):
+async def add_tech_specs(device_id: int, tech_specs: list[STechSpecForImport], token: str = Depends(get_token)):
     logger.info(f"Created tech specs for device_id[{device_id}]", extra={"token": token, "tech_specs": tech_specs})
     for tech_spec in tech_specs:
         await TechSpecsDAO.add(

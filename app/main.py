@@ -24,7 +24,7 @@ from app.inspections.router import router as inspections_router
 
 # from app.pages.router import router as pages_router
 # from app.images.router import router as images_router
-# from app.importer.router import router as import_router
+from app.importer.router import router as import_router
 
 sentry_sdk.init(
     dsn=settings.SENTRY_DSN,
@@ -39,7 +39,7 @@ app.include_router(tech_specs_router)
 app.include_router(inspections_router)
 # app.include_router(pages_router)
 # app.include_router(images_router)
-# app.include_router(import_router)
+app.include_router(import_router)
 
 app = VersionedFastAPI(
     app,

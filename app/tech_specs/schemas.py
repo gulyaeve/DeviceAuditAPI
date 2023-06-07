@@ -9,3 +9,11 @@ class STechSpec(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class STechSpecForImport(BaseModel):
+    description: str
+    reference_value: str
+
+    class Config:
+        orm_mode = True

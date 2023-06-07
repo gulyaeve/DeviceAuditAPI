@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends
 from app.auth.scheme import get_token
 from app.devices.dao import DevicesDAO
 from app.devices.schemas import SDevices
+from app.inspections.dao import InspectionsDAO
 from app.tech_specs.dao import TechSpecsDAO
 from app.exceptions import EntityNotExistsException
 from app.logger import logger
@@ -71,6 +72,7 @@ async def delete_device(device_id: int, token: str = Depends(get_token)):
     device = await DevicesDAO.find_by_id(device_id)
     if device:
         await TechSpecsDAO.delete(device_id=device_id)
+        await InspectionsDAO.delete(device_id=device_id)
         await DevicesDAO.delete(id=device_id)
     else:
         raise EntityNotExistsException

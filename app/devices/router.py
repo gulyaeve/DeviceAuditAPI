@@ -65,7 +65,7 @@ async def change_device_name(
 @router.delete(
     "/{device_id}",
     status_code=202,
-    description="Удаление устройства и спецификаций",
+    description="Удаление устройства и его спецификаций и отчетов",
 )
 async def delete_device(device_id: int, token: str = Depends(get_token)):
     logger.info(f"Deleted device id[{device_id}]", extra={"token": token})

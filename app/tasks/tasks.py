@@ -67,5 +67,5 @@ def write_pdf(
             )
         )
     path = os.path.abspath(f'{settings.STATIC_DIR}/html/{inspection_id}.html')
-    converter.convert(f'file:///{path}', output)
+    converter.convert(f'file:///{path}', output, install_driver=False)
     # os.remove(path)
